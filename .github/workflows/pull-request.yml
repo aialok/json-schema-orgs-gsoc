@@ -44,6 +44,9 @@ jobs:
       - name: Type checking
         run: yarn run typecheck
 
+      - name: Run Tests
+        run: yarn run coverage
+
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v4.0.1
         with:
