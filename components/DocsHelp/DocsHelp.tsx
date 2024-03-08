@@ -66,7 +66,9 @@ export function DocsHelp() {
 
   return (
     <section className='mt-10 mb-4 text-gray-600'>
-      <h2 className='text-[24px] font-semibold' data-testid='First-Heading'>Need Help?</h2>
+      <h2 className='text-[24px] font-semibold' data-testid='First-Heading'>
+        Need Help?
+      </h2>
       <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 pt-10 border-t border-gray-600'>
         <div>
           <h3 className='text-xl font-semibold mb-3'>
