@@ -3,7 +3,7 @@ import { getLayout } from '~/components/Sidebar';
 import fs from 'fs';
 import matter from 'gray-matter';
 import StyledMarkdown from '~/components/StyledMarkdown';
-import { DocsHelp } from '~/components/DocsHelp';
+import { DocsHelp } from '~/components/DocsHelp/DocsHelp';
 import { SectionContext } from '~/context';
 
 export async function getStaticProps() {

@@ -6,7 +6,7 @@ import getStaticMarkdownPaths from '~/lib/getStaticMarkdownPaths';
 import getStaticMarkdownProps from '~/lib/getStaticMarkdownProps';
 import { Headline1 } from '~/components/Headlines';
 import { SectionContext } from '~/context';
-import { DocsHelp } from '~/components/DocsHelp';
+import { DocsHelp } from '~/components/DocsHelp/DocsHelp';
 
 export async function getStaticPaths() {
   return getStaticMarkdownPaths('pages/overview');

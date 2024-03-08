@@ -6,7 +6,7 @@ import StyledMarkdown from '~/components/StyledMarkdown';
 import getStaticMarkdownPaths from '~/lib/getStaticMarkdownPaths';
 import getStaticMarkdownProps from '~/lib/getStaticMarkdownProps';
 import { SectionContext } from '~/context';
-import { DocsHelp } from '~/components/DocsHelp';
+import { DocsHelp } from '~/components/DocsHelp/DocsHelp';
 
 export async function getStaticPaths() {
   return getStaticMarkdownPaths('pages/understanding-json-schema/reference');

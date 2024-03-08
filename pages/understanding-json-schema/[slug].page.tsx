@@ -5,7 +5,7 @@ import { getLayout } from '~/components/Sidebar';
 import getStaticMarkdownPaths from '~/lib/getStaticMarkdownPaths';
 import getStaticMarkdownProps from '~/lib/getStaticMarkdownProps';
 import { Headline1 } from '~/components/Headlines';
-import { DocsHelp } from '~/components/DocsHelp';
+import { DocsHelp } from '~/components/DocsHelp/DocsHelp';
 import { SectionContext } from '~/context';
 
 export async function getStaticPaths() {

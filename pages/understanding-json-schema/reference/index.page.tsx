@@ -4,7 +4,7 @@ import fs from 'fs';
 import matter from 'gray-matter';
 import StyledMarkdown from '~/components/StyledMarkdown';
 import { SectionContext } from '~/context';
-import { DocsHelp } from '~/components/DocsHelp';
+import { DocsHelp } from '~/components/DocsHelp/DocsHelp';
 
 export async function getStaticProps() {
   const block1 = fs.readFileSync(
