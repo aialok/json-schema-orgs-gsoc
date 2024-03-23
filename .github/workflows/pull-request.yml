@@ -42,6 +42,7 @@ jobs:
 
       - name: Type checking
         run: yarn run typecheck
+           
 
       - name: Serve App Locally
         run: yarn start &

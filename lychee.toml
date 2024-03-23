@@ -1,0 +1,7 @@
+exclude_path = ["node_modules", "pages/**/*.html#rfc", "pages/understanding-json-schema/reference"]
+
+exclude = ["http://localhost:3000"]
+
+include = ["github/**.com"]
+
+exclude_link_local = true

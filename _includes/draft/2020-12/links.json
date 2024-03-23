@@ -31,7 +31,7 @@
             "format": "uri-template"
         },
         "hrefSchema": {
-            "$dynamicRef": "https://json-schema.org/draft/2020-12/hyper-schema#meta",
+            "$dynamicRef": "https://json-schem args: --accept 200,204,429 README.mda.org/draft/2020-12/hyper-schema#meta",
             "default": false
         },
         "templatePointers": {
