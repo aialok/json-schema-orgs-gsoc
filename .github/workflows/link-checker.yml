@@ -29,30 +29,28 @@ jobs:
         run: yarn install
 
       - name: Serve App Locally
-        run: yarn run dev &
+        run: yarn start &
 
       - name: Wait for App to Start
         run: sleep 20
-        
+      
       - name: Restore lychee cache
         uses: actions/cache@v3
         with:
           path: .lycheecache
           key: cache-lychee-${{ github.sha }}
           restore-keys: cache-lychee-
-  
+
       - name: Link Checker
         id: lychee
         uses: lycheeverse/lychee-action@v1.9.0
         with:
-          args: --base http://localhost:3000 --accept 200,204,429 --verbose --no-progress './pages/**/*.md'
+          args: --base http://localhost:3000 --verbose --no-progress --accept 200,204,429  './pages/**/*.md'
+          token: ${{secrets.TOKEN}}
         
-
       - name: Create Issue From File
         if: env.lychee_exit_code != 0
         uses: peter-evans/create-issue-from-file@v4
-        env:
-          token: ${{secrets.TOKEN}}
         with:
           title: Link Checker Report
           content-filepath: ./lychee/out.md
