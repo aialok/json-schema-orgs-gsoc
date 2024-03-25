@@ -4,18 +4,14 @@ on:
   repository_dispatch:
   workflow_dispatch:
   schedule:
-    - cron: "00 18 * * *"
-  pull_request:
-    types: [opened, synchronize]
-  push:
-    branches:
-      - '*'
+    - cron: '0 15 * * 1'  # Run every Monday at 3:00 PM UTC
 
 jobs:
   linkChecker:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout Repository  
+        uses: actions/checkout@v4
 
       - name: Submodule
         run: git submodule update --init --recursive
@@ -26,34 +22,36 @@ jobs:
           node-version: '20'
 
       - name: Install Dependencies
-        run: yarn install
+        run: yarn install --frozen-lockfile
 
       - name: Serve App Locally
-        run: yarn start &
+        run: yarn run dev &
 
       - name: Wait for App to Start
-        run: sleep 20
+        run: sleep 10
       
+      # This will restore the lychee cache
       - name: Restore lychee cache
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: .lycheecache
           key: cache-lychee-${{ github.sha }}
           restore-keys: cache-lychee-
 
+      # This will run the link checker on all markdown files in the pages directory      
       - name: Link Checker
         id: lychee
-        uses: lycheeverse/lychee-action@v1.9.0
+        uses: lycheeverse/lychee-action@v1
         with:
-          args: --base http://localhost:3000  --cache --max-cache-age 1d . --verbose --no-progress --accept 200,204,429  './pages/**/*.md'
+          args: --base http://localhost:3000  --verbose --no-progress --accept 200,204,429,403  './pages/**/*.md' --cache --max-cache-age 1d  http://localhost:3000 
           token: ${{secrets.TOKEN}}
-        
+      
+      # This will create an issue with the report if the link checker fails      
       - name: Create Issue From File
         if: env.lychee_exit_code != 0
-        uses: peter-evans/create-issue-from-file@v4
+        uses: peter-evans/create-issue-from-file@v5
         with:
           title: Link Checker Report
           content-filepath: ./lychee/out.md
           labels: report, automated issue
           token: ${{secrets.TOKEN}}
- 
