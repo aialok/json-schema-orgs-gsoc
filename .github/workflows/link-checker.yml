@@ -48,7 +48,7 @@ jobs:
       
       # This will create an issue with the report if the link checker fails      
       - name: Create Issue From File
-        if: env.lychee_exit_code != 0
+        if: github.repository_owner=='aialok' &&  env.lychee_exit_code != 0
         uses: peter-evans/create-issue-from-file@v5
         with:
           title: Link Checker Report
