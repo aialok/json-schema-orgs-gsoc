@@ -52,6 +52,7 @@ jobs:
         run: yarn add @octokit/core@5.1.0 
       
       - name: Create Issue
+        if: env.lychee_exit_code == 0
         uses: actions/github-script@v7
         env:
           TOKEN: ${{secrets.TOKEN}}
@@ -69,13 +70,22 @@ jobs:
                 owner: context.repo.owner,
                 repo: context.repo.repo,
                 issue_number: existingIssue.number,
-                body: 'require('fs').readFileSync('./lychee/out.md', 'utf8')
+                body: '##Link Checker Report\n\n' + require('fs').readFileSync('./lychee/out.md', 'utf8')
               });
             } else {
               await octokit.request('POST /repos/{owner}/{repo}/issues', {
                 owner: context.repo.owner,
                 repo: context.repo.repo,
                 title: 'Link Checker Report',
-                body: 'require('fs').readFileSync('./lychee/out.md', 'utf8')
+                body: '## Link Checker Report\n\n' + require('fs').readFileSync('./lychee/out.md', 'utf8')
               });
             }
+
+      # - name: Create Issue From File
+      #  
+      #   uses: peter-evans/create-issue-from-file@v5
+      #   with:
+      #     title: Link Checker Report
+      #     content-filepath: ./lychee/out.md
+      #     labels: report, automated issue
+      #     token: ${{secrets.TOKEN}}
