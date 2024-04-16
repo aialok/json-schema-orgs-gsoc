@@ -69,14 +69,14 @@ jobs:
                 owner: context.repo.owner,
                 repo: context.repo.repo,
                 issue_number: existingIssue.number,
-                body: 'Link Checker Report\n\n' + require('fs').readFileSync('./lychee/out.md', 'utf8')
+                body: '##Link Checker Report\n\n' + require('fs').readFileSync('./lychee/out.md', 'utf8')
               });
             } else {
               await octokit.request('POST /repos/{owner}/{repo}/issues', {
                 owner: context.repo.owner,
                 repo: context.repo.repo,
                 title: 'Link Checker Report',
-                body: 'Link Checker Report\n\n' + require('fs').readFileSync('./lychee/out.md', 'utf8')
+                body: '##Link Checker Report\n\n' + require('fs').readFileSync('./lychee/out.md', 'utf8')
               });
             }
 
