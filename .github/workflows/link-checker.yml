@@ -21,6 +21,13 @@ jobs:
         with:
           node-version: '20'
 
+      - name: Get Token
+        id: get_workflow_token
+        uses: peter-murray/workflow-application-token-action@v3
+        with:
+          application_id: ${{ vars.APPLICATION_ID }}
+          application_private_key: ${{ secrets.APP_PRIVATE_KEY }}
+
       - name: Install Dependencies
         run: yarn install --frozen-lockfile
 
@@ -55,7 +62,7 @@ jobs:
         if: env.lychee_exit_code != 0
         uses: actions/github-script@v7
         env:
-          TOKEN: ${{secrets.TOKEN}}
+          TOKEN: ${{ steps.get_workflow_token.outputs.token }}
         with:
           script: |
             const { Octokit } = require("@octokit/core");
